@@ -1,0 +1,12 @@
+{
+    "urls": [
+      "*://mail.google.com/mail/",
+      "*://gmail.com/",
+      "*://www.gmail.com/",
+      3,
+      4.2,
+      true
+    ],
+}
+printf "countof urls=%v\n", countof urls
+for(i=0; i<countof urls; i++) printf "%v\n", urls[i]

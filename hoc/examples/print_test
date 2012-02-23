@@ -1,0 +1,20 @@
+#local 
+e=0000111
+#local 
+a=1
+b=2
+c=3
+d.a=11
+d.b=22
+d.c=33
+d.e=00001111
+pi=PI
+True=true
+False=false
+printf "a=%d, b=%d, c=%d, e=%d\n", a,b,c,e
+printf "d.a=%d, d.b=%d, d.c=%d, d.e=%d\n", d.a, d.b, d.c, d.e
+printf "%0.27f\n",  pi
+print pi , "\n"
+printf "True=%t False=%t Null=%v\n", True, False
+print "asdf\n"
+print 
