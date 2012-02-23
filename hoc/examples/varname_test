@@ -1,0 +1,12 @@
+#t1 = 100
+#t1.t = 200
+temp.i=300
+temp.s="asdfasdf"
+temp.f=PI
+temp.o.i=200
+temp.o.s="фыва"
+temp.o.f=E
+temp
+temp.s
+temp.o.s
+print

@@ -1,0 +1,7 @@
+a=1
+if(a==1) b=10 else b=20
+b
+if(b==10) a=100 else a=200
+a
+True=false
+if(True) print "Wrong\n" else print "Correct\n"
