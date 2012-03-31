@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"hoc"
+	"bitbucket.org/santucco/hoc"
 	"os"
 	"strings"
 	"unicode/utf8"
