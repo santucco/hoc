@@ -47,11 +47,11 @@ var localTests = [...]test{
 }
 
 var printTests = [...]test{
-	{"print 1, 1.2, true, \"string\", \"\\string\\\"", "11.2truestring\\string\\"},
+	{"print 1, 1.2, true, \"string\", \"\\s\\\\tring\t\\\"", "11.2truestring\\s\\tring\t\\"},
 }
 
 var printfTests = [...]test{
-	{"printf \"%d %g %t %s\", 1, 1.2, true, \"string\"", "1 1.2 true string"},
+	{"printf \"%d %g %t %s\", 1, 1.2, true, \"s\\\\tring\"", "1 1.2 true s\\tring"},
 	{"printf \"string\"", "string"},
 	{"printf \"0809%08g\", 1234.56*100", "080900123456"},
 	{"f=\"%d\"; printf f, int(PI)", "3"},

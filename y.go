@@ -1,18 +1,16 @@
 
 //line hoc.y:2
 package hoc
-
-import (
-	"fmt"
-)
-
+import __yyfmt__ "fmt"
+//line hoc.y:2
+		
 type _pair struct{
 	inst	int
 	nargs	int
 }
 
 
-//line hoc.y:14
+//line hoc.y:10
 type yySymType struct {
 	yys int
 	sym			*symbol		// symbol pointer
@@ -118,7 +116,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyMaxDepth = 200
 
-//line hoc.y:872
+//line hoc.y:868
 
 	// end of grammar
 
@@ -340,12 +338,13 @@ type yyLexer interface {
 const yyFlag = -1000
 
 func yyTokname(c int) string {
-	if c > 0 && c <= len(yyToknames) {
-		if yyToknames[c-1] != "" {
-			return yyToknames[c-1]
+	// 4 is TOKSTART above
+	if c >= 4 && c-4 < len(yyToknames) {
+		if yyToknames[c-4] != "" {
+			return yyToknames[c-4]
 		}
 	}
-	return fmt.Sprintf("tok-%v", c)
+	return __yyfmt__.Sprintf("tok-%v", c)
 }
 
 func yyStatname(s int) string {
@@ -354,7 +353,7 @@ func yyStatname(s int) string {
 			return yyStatenames[s]
 		}
 	}
-	return fmt.Sprintf("state-%v", s)
+	return __yyfmt__.Sprintf("state-%v", s)
 }
 
 func yylex1(lex yyLexer, lval *yySymType) int {
@@ -387,7 +386,7 @@ out:
 		c = yyTok2[1] /* unknown char */
 	}
 	if yyDebug >= 3 {
-		fmt.Printf("lex %U %s\n", uint(char), yyTokname(c))
+		__yyfmt__.Printf("lex %U %s\n", uint(char), yyTokname(c))
 	}
 	return c
 }
@@ -414,7 +413,7 @@ ret1:
 yystack:
 	/* put a state and value onto the stack */
 	if yyDebug >= 4 {
-		fmt.Printf("char %v in %v\n", yyTokname(yychar), yyStatname(yystate))
+		__yyfmt__.Printf("char %v in %v\n", yyTokname(yychar), yyStatname(yystate))
 	}
 
 	yyp++
@@ -483,8 +482,8 @@ yydefault:
 			yylex.Error("syntax error")
 			Nerrs++
 			if yyDebug >= 1 {
-				fmt.Printf("%s", yyStatname(yystate))
-				fmt.Printf("saw %s\n", yyTokname(yychar))
+				__yyfmt__.Printf("%s", yyStatname(yystate))
+				__yyfmt__.Printf("saw %s\n", yyTokname(yychar))
 			}
 			fallthrough
 
@@ -503,7 +502,7 @@ yydefault:
 
 				/* the current p has no shift on "error", pop stack */
 				if yyDebug >= 2 {
-					fmt.Printf("error recovery pops state %d\n", yyS[yyp].yys)
+					__yyfmt__.Printf("error recovery pops state %d\n", yyS[yyp].yys)
 				}
 				yyp--
 			}
@@ -512,7 +511,7 @@ yydefault:
 
 		case 3: /* no shift yet; clobber input char */
 			if yyDebug >= 2 {
-				fmt.Printf("error recovery discards %s\n", yyTokname(yychar))
+				__yyfmt__.Printf("error recovery discards %s\n", yyTokname(yychar))
 			}
 			if yychar == yyEofCode {
 				goto ret1
@@ -524,7 +523,7 @@ yydefault:
 
 	/* reduction by production yyn */
 	if yyDebug >= 2 {
-		fmt.Printf("reduce %v in:\n\t%v\n", yyn, yyStatname(yystate))
+		__yyfmt__.Printf("reduce %v in:\n\t%v\n", yyn, yyStatname(yystate))
 	}
 
 	yynt := yyn
@@ -551,7 +550,7 @@ yydefault:
 	switch yynt {
 
 	case 4:
-		//line hoc.y:48
+		//line hoc.y:44
 		{
 			this := yylex.(*Hoc)
 			for  k, v := range yyS[yypt-1].val.(symbols) {
@@ -565,7 +564,7 @@ yydefault:
 		
 		}
 	case 5:
-		//line hoc.y:61
+		//line hoc.y:57
 		{ 
 			this := yylex.(*Hoc)
 			this.code((*Hoc).xpop); 
@@ -573,14 +572,14 @@ yydefault:
 			return 1; 
 		}
 	case 6:
-		//line hoc.y:68
+		//line hoc.y:64
 		{ 
 			this := yylex.(*Hoc)
 			this.code(nil); 
 			return 1; 
 		}
 	case 7:
-		//line hoc.y:74
+		//line hoc.y:70
 		{ 
 			this := yylex.(*Hoc)
 			this.code((*Hoc).printtop); 
@@ -588,7 +587,7 @@ yydefault:
 			return 1; 
 		}
 	case 10:
-		//line hoc.y:89
+		//line hoc.y:85
 		{
 			tracer.Trace(debLex, "localdef::LOCAL")
 	
@@ -598,7 +597,7 @@ yydefault:
 			}
 		}
 	case 11:
-		//line hoc.y:101
+		//line hoc.y:97
 		{
 			tracer.Trace(debLex, "localvar:: localdef varname")
 			this := yylex.(*Hoc)
@@ -608,7 +607,7 @@ yydefault:
 			}	
 		}
 	case 12:
-		//line hoc.y:110
+		//line hoc.y:106
 		{
 			tracer.Trace(debLex, "localvar::localdev varname '=' expr" )
 			this := yylex.(*Hoc)
@@ -622,7 +621,7 @@ yydefault:
 			this.code((*Hoc).assign)		
 		}
 	case 13:
-		//line hoc.y:126
+		//line hoc.y:122
 		{
 			tracer.Trace(debLex, "VAR - %s", yyS[yypt-0].sym.name)
 			this := yylex.(*Hoc)
@@ -634,7 +633,7 @@ yydefault:
 			yyVAL.sym = sym
 		}
 	case 14:
-		//line hoc.y:137
+		//line hoc.y:133
 		{		
 			tracer.Trace(debLex, "%s '.' %s ", yyS[yypt-2].sym.name, yyS[yypt-0].sym.name )
 			if yyS[yypt-2].sym.val == nil {
@@ -653,7 +652,7 @@ yydefault:
 			yyVAL.sym = sym
 		}
 	case 15:
-		//line hoc.y:158
+		//line hoc.y:154
 		{ 
 			tracer.Trace(debLex, "varname '=' expr" )
 			this := yylex.(*Hoc)
@@ -663,7 +662,7 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst 
 		}
 	case 16:
-		//line hoc.y:167
+		//line hoc.y:163
 		{ 
 			tracer.Trace(debLex, "%s ADDEQ expr ", yyS[yypt-2].sym.name)
 			this := yylex.(*Hoc)
@@ -673,7 +672,7 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst 
 		}
 	case 17:
-		//line hoc.y:176
+		//line hoc.y:172
 		{ 
 			tracer.Trace(debLex, "%s SUBEQ expr ", yyS[yypt-2].sym.name)
 			this := yylex.(*Hoc)	
@@ -683,7 +682,7 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst 
 		}
 	case 18:
-		//line hoc.y:185
+		//line hoc.y:181
 		{ 
 			tracer.Trace(debLex, "%s MULEQ expr ", yyS[yypt-2].sym.name)
 			this := yylex.(*Hoc)
@@ -693,7 +692,7 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst 
 		}
 	case 19:
-		//line hoc.y:194
+		//line hoc.y:190
 		{ 
 			tracer.Trace(debLex, "%s DIVEQ expr ", yyS[yypt-2].sym.name)
 			this := yylex.(*Hoc)
@@ -703,7 +702,7 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst
 		}
 	case 20:
-		//line hoc.y:203
+		//line hoc.y:199
 		{ 
 			tracer.Trace(debLex, "%s MODEQ expr ", yyS[yypt-2].sym.name)
 			this := yylex.(*Hoc)
@@ -713,20 +712,20 @@ yydefault:
 			yyVAL.inst=yyS[yypt-0].inst
 		}
 	case 21:
-		//line hoc.y:215
+		//line hoc.y:211
 		{
 			tracer.Trace(debLex, "stmt::localvar")
 			yyVAL.inst=yyS[yypt-0].inst
 		}
 	case 22:
-		//line hoc.y:220
+		//line hoc.y:216
 		{ 
 			tracer.Trace(debLex, "stmt::expr")
 			this := yylex.(*Hoc)
 			this.code((*Hoc).xpop)
 		}
 	case 23:
-		//line hoc.y:226
+		//line hoc.y:222
 		{ 	
 			tracer.Trace(debLex, "stmt::RETURN")	
 			this := yylex.(*Hoc)
@@ -734,7 +733,7 @@ yydefault:
 			this.code((*Hoc).procret) 
 		}
 	case 24:
-		//line hoc.y:233
+		//line hoc.y:229
 		{ 
 			tracer.Trace(debLex, "stmt::RETURN expr")	
 			this := yylex.(*Hoc)
@@ -743,7 +742,7 @@ yydefault:
 			this.code((*Hoc).funcret)
 		}
 	case 25:
-		//line hoc.y:241
+		//line hoc.y:237
 		{ 
 			tracer.Trace(debLex, "stmt::PROCEDURE begin")
 			yyVAL.inst = yyS[yypt-3].inst 
@@ -753,20 +752,20 @@ yydefault:
 			this.code(yyS[yypt-1].narg)
 		}
 	case 26:
-		//line hoc.y:250
+		//line hoc.y:246
 		{
 			tracer.Trace(debLex, "stmt::PRINT")	
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).printall) 
 		}
 	case 27:
-		//line hoc.y:256
+		//line hoc.y:252
 		{ 
 			tracer.Trace(debLex, "stmt::PRINT prlist")
 			yyVAL.inst = yyS[yypt-0].inst
 		}
 	case 28:
-		//line hoc.y:261
+		//line hoc.y:257
 		{ 
 			tracer.Trace(debLex, "stmt::PRINTF STRING paramlist")
 			this := yylex.(*Hoc)
@@ -778,7 +777,7 @@ yydefault:
 			yyVAL.inst = yyS[yypt-0].pair.inst
 		}
 	case 29:
-		//line hoc.y:272
+		//line hoc.y:268
 		{ 
 			tracer.Trace(debLex, "stmt::PRINTF STRING paramlist")
 			this := yylex.(*Hoc)
@@ -790,7 +789,7 @@ yydefault:
 			yyVAL.inst = yyS[yypt-0].pair.inst
 		}
 	case 30:
-		//line hoc.y:282
+		//line hoc.y:278
 		{
 			tracer.Trace(debLex, "stmt::while")
 			tracer.Trace(debLex, "while '(' cond ')' stmts end ")
@@ -799,7 +798,7 @@ yydefault:
 		this.prog[yyS[yypt-5].inst + 2] = yyS[yypt-0].inst 	// end, if cond fails 
 	}
 	case 31:
-		//line hoc.y:290
+		//line hoc.y:286
 		{
 			tracer.Trace(debLex, "stmt::for")
 			this := yylex.(*Hoc)	
@@ -809,7 +808,7 @@ yydefault:
 		this.prog[yyS[yypt-9].inst + 4] = yyS[yypt-0].inst	// end, if cond fails 
 	}
 	case 32:
-		//line hoc.y:299
+		//line hoc.y:295
 		{	// if with else 
 		tracer.Trace(debLex, "stmt::if else") 
 			tracer.Trace(debCode, "$1 %v $5 %v $8 %v $9 %v ", yyS[yypt-8].inst, yyS[yypt-4].inst, yyS[yypt-1].inst,yyS[yypt-0].inst)
@@ -819,7 +818,7 @@ yydefault:
 		this.prog[yyS[yypt-8].inst + 3] = yyS[yypt-0].inst 	// end, if cond fails 
 	}
 	case 33:
-		//line hoc.y:308
+		//line hoc.y:304
 		{	// else-less if 
 		tracer.Trace(debLex, "stmt::if") 
 			this := yylex.(*Hoc)	
@@ -827,25 +826,25 @@ yydefault:
 		this.prog[yyS[yypt-5].inst + 3] = yyS[yypt-0].inst 	// end, if cond fails 
 	}
 	case 34:
-		//line hoc.y:318
+		//line hoc.y:314
 		{
 			tracer.Trace(debLex, "stmts::stmt")
 		}
 	case 35:
-		//line hoc.y:322
+		//line hoc.y:318
 		{ 
 			tracer.Trace(debLex, "stmt::stmtlist")
 			yyVAL.inst = yyS[yypt-1].inst
 		}
 	case 36:
-		//line hoc.y:330
+		//line hoc.y:326
 		{ 
 			tracer.Trace(debLex, "cond")
 			this := yylex.(*Hoc)	
 			this.code(nil)
 		}
 	case 37:
-		//line hoc.y:339
+		//line hoc.y:335
 		{ 
 			tracer.Trace(debLex, "WHILE")
 			this := yylex.(*Hoc)
@@ -854,7 +853,7 @@ yydefault:
 			this.code(nil) 
 		}
 	case 38:
-		//line hoc.y:350
+		//line hoc.y:346
 		{ 
 			tracer.Trace(debLex, "FOR")
 			this := yylex.(*Hoc)
@@ -865,7 +864,7 @@ yydefault:
 			this.code(nil)
 		}
 	case 39:
-		//line hoc.y:363
+		//line hoc.y:359
 		{ 
 			tracer.Trace(debLex, "IF")
 			this := yylex.(*Hoc)
@@ -875,14 +874,14 @@ yydefault:
 			this.code(nil) 
 		}
 	case 40:
-		//line hoc.y:374
+		//line hoc.y:370
 		{ 
 			tracer.Trace(debLex, "begin")
 			this := yylex.(*Hoc)	
 			yyVAL.inst = this.progp
 		}
 	case 41:
-		//line hoc.y:382
+		//line hoc.y:378
 		{ 
 			tracer.Trace(debLex, "end")
 			this := yylex.(*Hoc)	
@@ -890,7 +889,7 @@ yydefault:
 			yyVAL.inst = this.progp
 		}
 	case 42:
-		//line hoc.y:391
+		//line hoc.y:387
 		{ 
 			tracer.Trace(debLex, "stmtlist")
 			this := yylex.(*Hoc)	
@@ -901,7 +900,7 @@ yydefault:
 	case 44:
 		yyVAL.inst = yyS[yypt-0].inst
 	case 45:
-		//line hoc.y:402
+		//line hoc.y:398
 		{ 
 			tracer.Trace(debLex, "expr::NUMBER")
 			this := yylex.(*Hoc)	
@@ -917,7 +916,7 @@ yydefault:
 			}
 		}
 	case 46:
-		//line hoc.y:417
+		//line hoc.y:413
 		{
 			tracer.Trace(debLex, "expr::NUMBER")
 			this := yylex.(*Hoc)	
@@ -925,7 +924,7 @@ yydefault:
 			this.code(yyS[yypt-0].val.(bool))	
 		}
 	case 47:
-		//line hoc.y:424
+		//line hoc.y:420
 		{ 
 			tracer.Trace(debLex, "expr::STRING")
 			this := yylex.(*Hoc)	
@@ -933,7 +932,7 @@ yydefault:
 			this.code(yyS[yypt-0].val.(string)) 
 		}
 	case 48:
-		//line hoc.y:431
+		//line hoc.y:427
 		{ 
 			tracer.Trace(debLex, "expr::VARNAME %s", yyS[yypt-0].sym.name)
 			this := yylex.(*Hoc)	
@@ -942,7 +941,7 @@ yydefault:
 			this.code((*Hoc).eval) 
 		}
 	case 49:
-		//line hoc.y:439
+		//line hoc.y:435
 		{
 			tracer.Trace(debLex, "expr::VARNAME %s '[' expr ']'", yyS[yypt-3].sym.name)
 			this := yylex.(*Hoc)	
@@ -952,7 +951,7 @@ yydefault:
 			yyVAL.inst = yyS[yypt-1].inst
 		}
 	case 50:
-		//line hoc.y:448
+		//line hoc.y:444
 		{
 			tracer.Trace(debLex, "expr::COUNTOF %s", yyS[yypt-1].sym.name)
 			this := yylex.(*Hoc)	
@@ -963,7 +962,7 @@ yydefault:
 	case 51:
 		yyVAL.inst = yyS[yypt-0].inst
 	case 52:
-		//line hoc.y:457
+		//line hoc.y:453
 		{ 
 			tracer.Trace(debLex, "expr::FUNCTION")
 			yyVAL.inst = yyS[yypt-3].inst; 
@@ -973,7 +972,7 @@ yydefault:
 			this.code(yyS[yypt-1].narg) 
 		}
 	case 53:
-		//line hoc.y:473
+		//line hoc.y:469
 		{ 
 			tracer.Trace(debLex, "expr::BLTIN")
 			yyVAL.inst=yyS[yypt-1].inst 
@@ -982,54 +981,54 @@ yydefault:
 			this.code(yyS[yypt-3].sym.val.(bltin))
 		}
 	case 54:
-		//line hoc.y:481
+		//line hoc.y:477
 		{ 		tracer.Trace(debLex, "expr::'(' expr ')'")
 			yyVAL.inst = yyS[yypt-1].inst; 
 		}
 	case 55:
-		//line hoc.y:485
+		//line hoc.y:481
 		{ 
 			tracer.Trace(debLex, "expr::expr '+' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).add) 
 		}
 	case 56:
-		//line hoc.y:491
+		//line hoc.y:487
 		{ 
 			tracer.Trace(debLex, "expr::expr '-' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).sub) 
 		}
 	case 57:
-		//line hoc.y:497
+		//line hoc.y:493
 		{ 
 			tracer.Trace(debLex, "expr::expr '*' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).mul) 
 		}
 	case 58:
-		//line hoc.y:503
+		//line hoc.y:499
 		{ 
 			tracer.Trace(debLex, "expr::expr '/' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).div) 
 		}
 	case 59:
-		//line hoc.y:509
+		//line hoc.y:505
 		{ 
 			tracer.Trace(debLex, "expr::expr '%' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).mod) 
 		}
 	case 60:
-		//line hoc.y:515
+		//line hoc.y:511
 		{ 
 			tracer.Trace(debLex, "expr::expr '^' expr")
 			this := yylex.(*Hoc)	
 			this.code ((*Hoc).power) 
 		}
 	case 61:
-		//line hoc.y:521
+		//line hoc.y:517
 		{ 
 			tracer.Trace(debLex, "expr::'-' expr")
 			yyVAL.inst=yyS[yypt-0].inst; 
@@ -1037,63 +1036,63 @@ yydefault:
 			this.code((*Hoc).negate) 
 		}
 	case 62:
-		//line hoc.y:528
+		//line hoc.y:524
 		{ 
 			tracer.Trace(debLex, "expr::expr 'GT expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).gt)
 		}
 	case 63:
-		//line hoc.y:534
+		//line hoc.y:530
 		{ 
 			tracer.Trace(debLex, "expr::expr GE expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).ge) 
 		}
 	case 64:
-		//line hoc.y:540
+		//line hoc.y:536
 		{ 		
 			tracer.Trace(debLex, "expr::expr LT expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).lt)
 		}
 	case 65:
-		//line hoc.y:546
+		//line hoc.y:542
 		{ 
 			tracer.Trace(debLex, "expr::expr LE expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).le)
 		}
 	case 66:
-		//line hoc.y:552
+		//line hoc.y:548
 		{ 
 			tracer.Trace(debLex, "expr::expr EQ expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).eq) 
 		}
 	case 67:
-		//line hoc.y:558
+		//line hoc.y:554
 		{ 
 			tracer.Trace(debLex, "expr::expr NE expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).ne) 
 		}
 	case 68:
-		//line hoc.y:564
+		//line hoc.y:560
 		{ 
 			tracer.Trace(debLex, "expr::expr AND expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).and)
 		}
 	case 69:
-		//line hoc.y:570
+		//line hoc.y:566
 		{ 
 			tracer.Trace(debLex, "expr::expr OR expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).or)
 		}
 	case 70:
-		//line hoc.y:576
+		//line hoc.y:572
 		{ 
 			tracer.Trace(debLex, "expr::NOT expr")
 			yyVAL.inst = yyS[yypt-0].inst; 
@@ -1101,7 +1100,7 @@ yydefault:
 			this.code((*Hoc).not) 
 		}
 	case 71:
-		//line hoc.y:583
+		//line hoc.y:579
 		{ 
 			tracer.Trace(debLex, "expr::INC expr")
 			this := yylex.(*Hoc)
@@ -1110,7 +1109,7 @@ yydefault:
 			yyVAL.inst = this.code((*Hoc).preinc)
 		}
 	case 72:
-		//line hoc.y:591
+		//line hoc.y:587
 		{ 
 			tracer.Trace(debLex, "expr::DEC expr")
 			this := yylex.(*Hoc)	
@@ -1119,7 +1118,7 @@ yydefault:
 			this.code((*Hoc).predec)
 		}
 	case 73:
-		//line hoc.y:599
+		//line hoc.y:595
 		{ 
 			tracer.Trace(debLex, "expr::expr INC")
 			this := yylex.(*Hoc)	
@@ -1128,7 +1127,7 @@ yydefault:
 			this.code((*Hoc).postinc)
 		}
 	case 74:
-		//line hoc.y:607
+		//line hoc.y:603
 		{ 
 			tracer.Trace(debLex, "expr::expr DEC")
 			this := yylex.(*Hoc)	
@@ -1137,21 +1136,21 @@ yydefault:
 			this.code((*Hoc).postdec)
 		}
 	case 75:
-		//line hoc.y:618
+		//line hoc.y:614
 		{
 			tracer.Trace(debLex, "prlist::expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).prexpr) 
 		}
 	case 76:
-		//line hoc.y:624
+		//line hoc.y:620
 		{ 
 			tracer.Trace(debLex, "prlist::prlist ',' expr")
 			this := yylex.(*Hoc)	
 			this.code((*Hoc).prexpr)
 		}
 	case 77:
-		//line hoc.y:633
+		//line hoc.y:629
 		{ 
 			tracer.Trace(debLex, "defn::FUNC %s", yyS[yypt-0].sym.name)
 			this := yylex.(*Hoc)	
@@ -1164,12 +1163,12 @@ yydefault:
 			this.locsyms = newSymbols()
 		}
 	case 78:
-		//line hoc.y:645
+		//line hoc.y:641
 		{ 
 			tracer.Trace(debLex, "defn::FUNC %s formals", yyS[yypt-4].sym.name)	
 		}
 	case 79:
-		//line hoc.y:649
+		//line hoc.y:645
 		{
 			tracer.Trace(debLex, "defn::FUNC %s stmt", yyS[yypt-6].sym.name)
 			this := yylex.(*Hoc)	
@@ -1178,7 +1177,7 @@ yydefault:
 			this.locsyms = nil
 		}
 	case 80:
-		//line hoc.y:657
+		//line hoc.y:653
 		{ 
 			tracer.Trace(debLex, "defn::PROC %s", yyS[yypt-0].sym.name)
 			this := yylex.(*Hoc)	
@@ -1191,12 +1190,12 @@ yydefault:
 			this.locsyms = newSymbols()
 		}
 	case 81:
-		//line hoc.y:669
+		//line hoc.y:665
 		{
 			tracer.Trace(debLex, "defn::PROC %s formals", yyS[yypt-4].sym.name)	
 		}
 	case 82:
-		//line hoc.y:673
+		//line hoc.y:669
 		{ 
 			tracer.Trace(debLex, "defn::PROC %s formals", yyS[yypt-6].sym.name)
 			this := yylex.(*Hoc)	
@@ -1205,17 +1204,17 @@ yydefault:
 			this.locsyms = nil
 		}
 	case 83:
-		//line hoc.y:682
+		//line hoc.y:678
 		{ yyVAL.formals = nil; }
 	case 84:
-		//line hoc.y:684
+		//line hoc.y:680
 		{ 
 			tracer.Trace(debLex, "formals::%s", yyS[yypt-0].sym.name)
 			tracer.Trace(debLex, "formal parameter %s", yyS[yypt-0].sym.name)
 			yyVAL.formals = formallist(yyS[yypt-0].sym, nil) 
 		}
 	case 85:
-		//line hoc.y:690
+		//line hoc.y:686
 		{ 
 			tracer.Trace(debLex, "formals::%s ',' formals", yyS[yypt-2].sym.name)
 			yyVAL.formals = formallist(yyS[yypt-2].sym, yyS[yypt-0].formals) 
@@ -1227,56 +1226,56 @@ yydefault:
 	case 88:
 		yyVAL.sym = yyS[yypt-0].sym
 	case 89:
-		//line hoc.y:702
+		//line hoc.y:698
 		{ 
 			tracer.Trace(debLex, "args:: no arguments")
 			yyVAL.narg = 0 
 		}
 	case 90:
-		//line hoc.y:708
+		//line hoc.y:704
 		{ 
 			tracer.Trace(debLex, "args::arglist")	}
 	case 91:
-		//line hoc.y:713
+		//line hoc.y:709
 		{ 
 			tracer.Trace(debLex, "arglist:: one argument")
 			yyVAL.narg = 1 
 		}
 	case 92:
-		//line hoc.y:718
+		//line hoc.y:714
 		{ 
 			tracer.Trace(debLex, "arglist:: yet another argument")
 			yyVAL.narg = yyS[yypt-2].narg + 1 
 		}
 	case 93:
-		//line hoc.y:725
+		//line hoc.y:721
 		{ 
 			tracer.Trace(debLex, "paramlist")
 			yyVAL.pair.nargs = 0
 		}
 	case 94:
-		//line hoc.y:730
+		//line hoc.y:726
 		{ 
 			tracer.Trace(debLex, "paramlist:: expr")
 			yyVAL.pair.nargs = yyS[yypt-0].pair.nargs + 1
 			yyVAL.pair.inst = yyS[yypt-1].inst
 		}
 	case 97:
-		//line hoc.y:743
+		//line hoc.y:739
 		{
 			tracer.Trace(debLex, "object::members %v", yyS[yypt-2].val)
 			yyVAL.val = yyS[yypt-2].val
 		}
 	case 98:
-		//line hoc.y:750
+		//line hoc.y:746
 		{
 			yyVAL.val = newSymbols()
 		}
 	case 99:
-		//line hoc.y:754
+		//line hoc.y:750
 		{}
 	case 100:
-		//line hoc.y:759
+		//line hoc.y:755
 		{
 			syms := newSymbols()
 			syms = install(syms, yyS[yypt-0].sym)
@@ -1284,7 +1283,7 @@ yydefault:
 			yyVAL.val = syms
 		}
 	case 101:
-		//line hoc.y:766
+		//line hoc.y:762
 		{
 			tracer.Trace(debLex, "members::pair ',' members")
 			syms := yyS[yypt-3].val.(symbols)
@@ -1300,7 +1299,7 @@ yydefault:
 			yyVAL.val = syms	
 		}
 	case 102:
-		//line hoc.y:784
+		//line hoc.y:780
 		{
 			tracer.Trace(debLex, "pair")
 			sym := newSymbol(yyS[yypt-2].val.(string), VAR, yyS[yypt-0].val)
@@ -1308,18 +1307,18 @@ yydefault:
 			yyVAL.sym = sym
 		}
 	case 103:
-		//line hoc.y:794
+		//line hoc.y:790
 		{
 			tracer.Trace(debLex, "array::elements %v", yyS[yypt-2].val)
 			yyVAL.val = yyS[yypt-2].val
 		}
 	case 104:
-		//line hoc.y:801
+		//line hoc.y:797
 		{
 			yyVAL.val = make([]symval, 0)
 		}
 	case 105:
-		//line hoc.y:805
+		//line hoc.y:801
 		{
 			tracer.Trace(debLex, "elements::value")
 			e := make([]symval, 1)
@@ -1327,7 +1326,7 @@ yydefault:
 			yyVAL.val = e		
 		}
 	case 106:
-		//line hoc.y:812
+		//line hoc.y:808
 		{
 			tracer.Trace(debLex, "elements::value ',' elements")
 			e := make([]symval, len(yyS[yypt-0].val.([]symval)) + 1)

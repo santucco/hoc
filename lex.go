@@ -152,6 +152,12 @@ func (this *Hoc) checkrune() rune { // get next char with \'s interpreted
 		return c1
 	}
 	c2 := this.getrune()
+	if c2 == '\\' {
+		p := this.linepos
+		this.ungetrune(c2)
+		this.line = this.line[0:this.linepos] + this.line[p:len(this.line)]
+		return c1
+	}
 	if !unicode.IsLower(c2) {
 		this.ungetrune(c2)
 		return c1
