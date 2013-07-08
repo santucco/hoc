@@ -4,7 +4,7 @@ hoc : y.go
 	go build
 
 clean: 
-	rm y.go y.output 
+	-rm -f y.go y.output 
 
 test:
 	go test

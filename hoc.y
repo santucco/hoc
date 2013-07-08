@@ -1,10 +1,6 @@
 %{
 package hoc
 
-import (
-	"fmt"
-)
-
 type _pair struct{
 	inst	int
 	nargs	int
